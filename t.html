@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Programmers Wish Their Teachers - Mahnoor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            /* Pink, Purple, and Red stylish gradient background */
+            background: linear-gradient(135deg, #2b0b18, #6b1139, #9c1d47, #4a0e2e);
+            background-size: 300% 300%;
+            animation: gradientMove 8s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: #fff;
+            position: relative;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Icons Background */
+        .floating-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .float-icon {
+            position: absolute;
+            font-size: 24px;
+            animation: floatUp 6s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(105vh) scale(0.8);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.85;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Pages */
+        .page {
+            position: absolute;
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .hidden {
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none;
+            display: none;
+        }
+
+        /* First Page Styling */
+        .welcome-title {
+            font-size: 3rem;
+            color: #ffb6c1;
+            text-shadow: 0 4px 20px rgba(255, 105, 180, 0.6);
+            margin-bottom: 30px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            font-family: 'Brush Script MT', cursive, sans-serif;
+        }
+
+        .open-btn {
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .open-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 15px 30px rgba(255, 20, 147, 0.8);
+        }
+
+        /* Second Page (Card) Styling */
+        h1 {
+            font-size: 2.5rem;
+            color: #ff69b4;
+            text-shadow: 0 4px 15px rgba(255, 105, 180, 0.5);
+            margin-bottom: 5px;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #ffb6c1;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 10px rgba(255, 182, 193, 0.4);
+        }
+
+        .card-box {
+            background: rgba(107, 17, 57, 0.4);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(255, 105, 180, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-box:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 20, 147, 0.8);
+            box-shadow: 0 20px 40px rgba(255, 20, 147, 0.4);
+        }
+
+        .card-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .card-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #fce4ec;
+        }
+
+        .signature {
+            margin-top: 15px;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #ffb6c1;
+            font-weight: bold;
+        }
+
+        /* Celebrate Button */
+        .celebrate-btn {
+            margin-top: 25px;
+            background: linear-gradient(135deg, #ff4500, #ff1493);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .celebrate-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 69, 0, 0.6);
+        }
+
+        /* Confetti / Popop Effect */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            opacity: 0.9;
+            animation: fall linear forwards;
+            z-index: 20;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Continually Moving Background Icons -->
+    <div class="floating-icons" id="floatingIcons"></div>
+
+    <!-- Page 1: Landing Page -->
+    <div class="page" id="page1">
+        <div class="welcome-title">How Programmers Wish Their Teachers</div>
+        <button class="open-btn" onclick="openCardPage()">Open Card 💌</button>
+    </div>
+
+    <!-- Page 2: Main Card & Celebration Page -->
+    <div class="page hidden" id="page2">
+        <h1>5 October</h1>
+        <h2>Happy Teacher's Day! 🍎✨</h2>
+
+        <div class="card-box" id="cardBox" onclick="revealMessage()">
+            <div class="card-content" id="cardContent">
+                <h3>Click to Reveal Message 💻</h3>
+                <p>Tap here to see a special tribute...</p>
+            </div>
+        </div>
+
+        <button class="celebrate-btn" onclick="startCelebration()">Celebrate! 🎉</button>
+    </div>
+
+    <script>
+        // Generate continuous floating background icons
+        const iconsContainer = document.getElementById('floatingIcons');
+        const iconList = ['💻', '🍎', '✨', '❤️', '📚', '⚡', '🎓', '💡'];
+
+        function createFloatingIcon() {
+            const span = document.createElement('div');
+            span.classList.add('float-icon');
+            span.innerText = iconList[Math.floor(Math.random() * iconList.length)];
+            span.style.left = Math.random() * 100 + 'vw';
+            span.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            span.style.fontSize = (Math.random() * 14 + 18) + 'px';
+            
+            iconsContainer.appendChild(span);
+
+            setTimeout(() => {
+                span.remove();
+            }, 6000);
+        }
+
+        // Spawn icons continually
+        setInterval(createFloatingIcon, 400);
+
+        // Page Transition Function
+        function openCardPage() {
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+        }
+
+        // Reveal Card Message
+        let isOpened = false;
+        function revealMessage() {
+            const content = document.getElementById('cardContent');
+            if (!isOpened) {
+                content.innerHTML = `
+                    <h3>Thank You, Dear Teacher! 🌟</h3>
+                    <p>You are the guiding light that compiles our potential into success. Your patience, wisdom, and code of kindness shape our future forever. ❤️</p>
+                    <div class="signature">— From Mahnoor ✨</div>
+                `;
+                isOpened = true;
+            } else {
+                content.innerHTML = `
+                    <h3>Click to Reveal Message 💻</h3>
+                    <p>Tap here to see a special tribute...</p>
+                `;
+                isOpened = false;
+            }
+        }
+
+        // Celebration Confetti Pop-up Effect
+        function startCelebration() {
+            for (let i = 0; i < 80; i++) {
+                createConfetti();
+            }
+            
+            const btn = document.querySelector('.celebrate-btn');
+            btn.innerText = "Celebrating! 🎊";
+            setTimeout(() => {
+                btn.innerText = "Celebrate! 🎉";
+            }, 3000);
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            
+            const colors = ['#ff1493', '#ff69b4', '#ff4500', '#da70d6', '#ffb6c1', '#ff6347', '#ba55d3'];
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            confetti.style.width = (Math.random() * 8 + 6) + 'px';
+            confetti.style.height = (Math.random() * 8 + 6) + 'px';
+            
+            if (Math.random() > 0.5) {
+                confetti.style.borderRadius = '50%';
+            }
+
+            document.body.appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove();
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
